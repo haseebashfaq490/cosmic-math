@@ -13,119 +13,129 @@ st.set_page_config(
     layout="centered"
 )
 
-# --- FUN, KID-FRIENDLY SPACE THEME ---
+# --- FUN, NEON PINK & PURPLE SPACE THEME ---
 st.markdown("""
 <style>
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
 
-    /* Deep Space Background */
+    /* Deep Space Purple Background */
     .stApp {
-        background-color: #0b0c10;
-        background-image: radial-gradient(circle at 50% 10%, #1f2833 0%, #0b0c10 70%);
+        background-color: #1a0b2e;
+        background-image: radial-gradient(circle at 50% 10%, #3a0ca3 0%, #1a0b2e 80%);
         color: #ffffff;
     }
 
-    /* Tabs Styling - Allow wrapping for 5 tabs */
+    /* Tabs Styling - Bubbly and Fun */
     div[data-testid="stTabs"] > div > div > div { overflow: visible !important; }
     div[data-baseweb="tab_list"] {
-        background-color: #1f2833;
-        border-radius: 20px;
-        padding: 8px;
+        background-color: rgba(45, 27, 78, 0.8);
+        border-radius: 25px;
+        padding: 10px;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 8px;
+        gap: 10px;
         margin-bottom: 2rem;
+        border: 2px solid #7209b7;
     }
     button[data-baseweb="tab"] {
         background-color: transparent !important;
         border: none !important;
-        padding: 10px 15px !important;
+        padding: 12px 18px !important;
     }
     button[data-baseweb="tab"] p {
-        color: #c5c6c7 !important;
-        font-size: 1rem !important;
+        color: #e2e8f0 !important;
+        font-size: 1.05rem !important;
         font-weight: 700 !important;
     }
+    /* Active Tab - Bright Pink Glow */
     button[data-baseweb="tab"][aria-selected="true"] {
-        background-color: #66fcf1 !important;
-        border-radius: 12px !important;
+        background-color: #f72585 !important;
+        border-radius: 15px !important;
+        box-shadow: 0 0 15px rgba(247, 37, 133, 0.6) !important;
     }
     button[data-baseweb="tab"][aria-selected="true"] p {
-        color: #0b0c10 !important; 
+        color: #ffffff !important; 
         font-weight: 900 !important;
     }
 
     /* Hero Section */
     .hero-title {
-        font-size: 3.5rem;
+        font-size: 3.8rem;
         font-weight: 900;
         text-align: center;
         color: #ffffff;
         margin-bottom: 0.2rem;
+        text-shadow: 0 0 10px rgba(247, 37, 133, 0.5);
     }
-    .hero-title span { color: #66fcf1; }
+    .hero-title span { color: #f72585; }
     .hero-subtitle {
         text-align: center;
-        font-size: 1.2rem;
-        color: #45a29e;
-        margin-bottom: 2rem;
-        font-weight: 600;
+        font-size: 1.3rem;
+        color: #f1a5ff;
+        margin-bottom: 2.5rem;
+        font-weight: 700;
     }
 
-    /* Inputs */
+    /* Inputs - High Contrast */
     .stTextInput input, .stTextArea textarea, .stNumberInput input {
-        background-color: #1f2833 !important;
+        background-color: #2d1b4e !important;
         color: #ffffff !important;
-        border: 2px solid #45a29e !important;
-        border-radius: 12px !important;
-        font-size: 1.1rem !important;
-        padding: 10px !important;
+        border: 3px solid #b5179e !important;
+        border-radius: 15px !important;
+        font-size: 1.2rem !important;
+        padding: 12px !important;
+        font-weight: bold !important;
     }
     .stTextInput input:focus, .stTextArea textarea:focus, .stNumberInput input:focus {
-        border-color: #66fcf1 !important;
-        box-shadow: 0 0 10px rgba(102, 252, 241, 0.4) !important;
+        border-color: #f72585 !important;
+        box-shadow: 0 0 15px rgba(247, 37, 133, 0.5) !important;
     }
 
-    /* Buttons */
+    /* Buttons - Bright Gradients */
     div.stButton > button {
-        background: linear-gradient(90deg, #45a29e 0%, #66fcf1 100%) !important;
-        color: #0b0c10 !important;
+        background: linear-gradient(90deg, #7209b7 0%, #f72585 100%) !important;
+        color: #ffffff !important;
         border: none !important;
         border-radius: 50px !important;
         width: 100% !important;
-        padding: 1rem !important;
-        font-size: 1.2rem !important;
-        font-weight: 800 !important;
-        transition: transform 0.2s;
+        padding: 1.2rem !important;
+        font-size: 1.3rem !important;
+        font-weight: 900 !important;
+        letter-spacing: 1px !important;
+        transition: transform 0.2s, box-shadow 0.2s;
+        box-shadow: 0 4px 15px rgba(114, 9, 183, 0.4) !important;
     }
     div.stButton > button:hover {
-        transform: scale(1.02) !important;
-        box-shadow: 0 0 15px rgba(102, 252, 241, 0.6) !important;
+        transform: scale(1.03) !important;
+        box-shadow: 0 0 20px rgba(247, 37, 133, 0.8) !important;
     }
 
-    /* Formatting AI Output */
-    .stMarkdown h2, .stMarkdown h3 { color: #66fcf1 !important; }
-    .stMarkdown p, .stMarkdown li { font-size: 1.15rem; line-height: 1.6; color: #e0e2e4 !important; }
+    /* Formatting AI Output & Boxes */
+    .stMarkdown h2, .stMarkdown h3 { color: #f1a5ff !important; font-weight: 800 !important; }
+    .stMarkdown p, .stMarkdown li { font-size: 1.2rem; line-height: 1.6; color: #f8fafc !important; }
     
-    /* Highlight Boxes */
     .question-box {
-        background-color: #1f2833;
-        padding: 20px;
-        border-radius: 15px;
-        border-left: 5px solid #66fcf1;
+        background: linear-gradient(135deg, #3a0ca3, #7209b7);
+        padding: 25px;
+        border-radius: 20px;
+        border: 3px solid #f72585;
         margin-bottom: 20px;
-        font-size: 1.3rem;
-        font-weight: bold;
+        font-size: 1.4rem;
+        font-weight: 900;
+        color: white;
+        text-align: center;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     }
     .score-box {
         text-align: center;
-        font-size: 2rem;
-        color: #66fcf1;
+        font-size: 2.5rem;
+        color: #f72585;
         font-weight: 900;
         margin-bottom: 20px;
+        text-shadow: 0 0 15px rgba(247, 37, 133, 0.4);
     }
 </style>
 """, unsafe_allow_html=True)
@@ -153,7 +163,32 @@ def generate_meteor():
         st.session_state.meteor_ans = a * b
     st.session_state.meteor_q = f"{a} {op} {b}"
 
-# Generate first meteor if empty
+# Daily Challenge Generator
+def generate_daily_quiz():
+    quiz = []
+    ops = ['+', '-', 'x', '÷']
+    for _ in range(10):
+        op = random.choice(ops)
+        if op == '+':
+            a, b = random.randint(15, 200), random.randint(15, 200)
+            ans = a + b
+        elif op == '-':
+            a, b = random.randint(50, 300), random.randint(10, 49)
+            ans = a - b
+        elif op == 'x':
+            a, b = random.randint(3, 12), random.randint(3, 12)
+            ans = a * b
+        elif op == '÷':
+            b = random.randint(2, 12)
+            ans = random.randint(2, 12)
+            a = b * ans # Ensures perfect division with no remainders!
+        quiz.append({'q': f"{a} {op} {b}", 'ans': ans})
+    return quiz
+
+if 'daily_quiz' not in st.session_state:
+    st.session_state.daily_quiz = generate_daily_quiz()
+    st.session_state.quiz_submitted = False
+
 if not st.session_state.meteor_q:
     generate_meteor()
 
@@ -161,7 +196,7 @@ if not st.session_state.meteor_q:
 st.markdown("<div class='hero-title'>Cosmic <span>Math</span> 🚀</div>", unsafe_allow_html=True)
 st.markdown("<div class='hero-subtitle'>Your 5th Grade Learning Universe!</div>", unsafe_allow_html=True)
 
-tab1, tab2, tab3, tab4, tab5 = st.tabs(["📚 Learn", "🎯 Practice", "✖️ Tables", "🕹️ Arcade", "🦄 Story Math"])
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["📚 Learn", "🎯 Practice", "🏆 10-Q Challenge", "✖️ Tables", "🕹️ Arcade", "🦄 Story Math"])
 
 # ==========================================
 # TAB 1: LEARN A CONCEPT
@@ -182,10 +217,10 @@ with tab1:
                 st.markdown(response.choices[0].message.content)
 
 # ==========================================
-# TAB 2: PRACTICE MISSION
+# TAB 2: PRACTICE MISSION (Custom Topic)
 # ==========================================
 with tab2:
-    st.write("### Ready for a math mission?")
+    st.write("### Focus on one special topic!")
     practice_topic = st.text_input("What topic should we practice? (e.g., Multiplying by 10)", key="practice_topic")
     
     if st.button("Give Me a Mission! 🎲"):
@@ -219,19 +254,75 @@ with tab2:
                         st.rerun()
 
 # ==========================================
-# TAB 3: TIMES TABLE TURBO
+# TAB 3: 10-QUESTION DAILY CHALLENGE
 # ==========================================
 with tab3:
+    st.write("### 🏆 The 10-Question Daily Challenge!")
+    st.write("A brand new mix of addition, subtraction, multiplication, and division every time you open the app!")
+    
+    # Create the quiz form
+    quiz_answers = []
+    for i, q in enumerate(st.session_state.daily_quiz):
+        st.markdown(f"**Question {i+1}:**")
+        # Ensure step=1 so it only accepts integers
+        ans = st.number_input(f"{q['q']} = ?", key=f"quiz_q_{i}", value=0, step=1)
+        quiz_answers.append(ans)
+        st.markdown("---")
+
+    if st.button("Submit My Quiz! 🚀"):
+        score = 0
+        mistakes_for_ai = []
+        
+        st.write("### Let's see how you did!")
+        
+        # Grade instantly
+        for i, q in enumerate(st.session_state.daily_quiz):
+            user_ans = quiz_answers[i]
+            correct_ans = q['ans']
+            if user_ans == correct_ans:
+                score += 1
+                st.success(f"**Q{i+1}:** {q['q']} = {user_ans} ✅ **Correct!**")
+            else:
+                st.error(f"**Q{i+1}:** {q['q']} = {user_ans} ❌ *(Correct answer: {correct_ans})*")
+                mistakes_for_ai.append(f"{q['q']} (Student guessed {user_ans})")
+        
+        st.markdown(f"<div class='score-box'>Your Score: {score}/10</div>", unsafe_allow_html=True)
+        
+        if score == 10:
+            st.balloons()
+            st.success("🎉 PERFECT SCORE! You are a Math Genius! 🎉")
+        
+        # Get AI step-by-step for the whole quiz (praising right ones, explaining wrong ones)
+        api_key = os.getenv("GROQ_API_KEY")
+        client = Groq(api_key=api_key)
+        
+        if score < 10:
+            prompt = f"""You are a fun 5th-grade math teacher. A student just took a 10-question math quiz and got {score}/10. 
+            They made mistakes on these specific problems: {mistakes_for_ai}.
+            Write a very encouraging, cheerleader-style message congratulating them on the ones they got right. 
+            Then, provide a simple, step-by-step explanation ONLY for the problems they got wrong so they can learn from them. Use lots of emojis!"""
+        else:
+             prompt = "A 5th grade student just got a perfect 10/10 on their daily math mix (Addition, Subtraction, Multiplication, Division). Write a short, extremely hype, congratulatory message with lots of space/rocket emojis!"
+             
+        with st.spinner("AI Teacher is writing your feedback... ✍️"):
+            response = client.chat.completions.create(model="llama-3.3-70b-versatile", messages=[{"role": "user", "content": prompt}])
+            st.markdown("### 👩‍🏫 Teacher's Notes:")
+            st.markdown(response.choices[0].message.content)
+
+    if st.button("🔄 Generate a Brand New 10-Question Quiz!"):
+        st.session_state.daily_quiz = generate_daily_quiz()
+        st.rerun()
+
+# ==========================================
+# TAB 4: TIMES TABLE TURBO
+# ==========================================
+with tab4:
     st.write("### Master Your Multiplication Tables!")
     st.write("Pick a number to see its table and unlock a magic memory trick.")
     
-    # Slider goes from 1 to 20
     table_num = st.slider("Select a number:", 1, 20, 7)
     
-    # Display the table cleanly
     cols = st.columns(3)
-    
-    # Loop goes up to 20 (range 1 to 21)
     for i in range(1, 21):
         col_index = (i - 1) % 3
         cols[col_index].markdown(f"**{table_num} x {i} = {table_num * i}**")
@@ -246,20 +337,17 @@ with tab3:
             st.markdown(response.choices[0].message.content)
 
 # ==========================================
-# TAB 4: MATH ARCADE (METEOR DEFENSE)
+# TAB 5: MATH ARCADE (METEOR DEFENSE)
 # ==========================================
-with tab4:
+with tab5:
     st.write("### ☄️ Meteor Defense!")
     st.write("Solve the math problem to fire your lasers and destroy the meteor!")
     
     st.markdown(f"<div class='score-box'>Score: {st.session_state.arcade_score}</div>", unsafe_allow_html=True)
+    st.markdown(f"<div class='question-box'>Incoming Meteor: <br> <span style='font-size:3rem; color:#f1a5ff;'>{st.session_state.meteor_q} = ?</span></div>", unsafe_allow_html=True)
     
-    st.markdown(f"<div class='question-box' style='text-align:center;'>Incoming Meteor: <br> <span style='font-size:2.5rem; color:#ec4899;'>{st.session_state.meteor_q} = ?</span></div>", unsafe_allow_html=True)
-    
-    # Use columns to make the input box smaller
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        # Step=1 ensures it only accepts whole numbers
         arcade_guess = st.number_input("Enter Answer:", value=0, step=1, key="arcade_input")
         
         if st.button("Fire Laser! 💥"):
@@ -267,18 +355,18 @@ with tab4:
                 st.success("🎯 Direct Hit! +10 Points!")
                 st.balloons()
                 st.session_state.arcade_score += 10
-                generate_meteor() # Create the next problem
-                st.rerun() # Refresh the page to show new problem
+                generate_meteor()
+                st.rerun()
             else:
                 st.error(f"Missed! The correct answer was {st.session_state.meteor_ans}. Try the next one!")
-                st.session_state.arcade_score -= 5 # Penalty for missing
+                st.session_state.arcade_score -= 5
                 generate_meteor()
                 st.rerun()
 
 # ==========================================
-# TAB 5: STORY MATH
+# TAB 6: STORY MATH
 # ==========================================
-with tab5:
+with tab6:
     st.write("### Let's turn your favorite things into math!")
     interests = st.text_input("What do you love? (e.g., Taylor Swift, Minecraft, Cats)")
     
