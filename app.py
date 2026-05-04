@@ -83,18 +83,16 @@ st.markdown("""
        INPUTS - HIGH CONTRAST & VISIBILITY FIX
        --------------------------------------------------- */
     
-    /* 1. Fix the Labels (The text directly above the input box) */
     .stTextInput label p, .stNumberInput label p, .stTextArea label p {
-        color: #f1a5ff !important; /* Bright neon lavender */
+        color: #f1a5ff !important; 
         font-size: 1.15rem !important;
         font-weight: 800 !important;
         letter-spacing: 0.5px;
     }
 
-    /* 2. Fix the Box Itself */
     .stTextInput input, .stTextArea textarea, .stNumberInput input {
         background-color: #2d1b4e !important;
-        color: #ffffff !important; /* Bright white typed text */
+        color: #ffffff !important; 
         border: 3px solid #b5179e !important;
         border-radius: 15px !important;
         font-size: 1.2rem !important;
@@ -102,13 +100,11 @@ st.markdown("""
         font-weight: bold !important;
     }
 
-    /* 3. Fix the Placeholder (The ghost text inside the box before typing) */
     .stTextInput input::placeholder, .stTextArea textarea::placeholder {
-        color: #d8b4e2 !important; /* Light pink/grey so it's readable but lighter than typed text */
+        color: #d8b4e2 !important; 
         opacity: 0.8 !important;
     }
 
-    /* Glowing Focus Effect */
     .stTextInput input:focus, .stTextArea textarea:focus, .stNumberInput input:focus {
         border-color: #f72585 !important;
         box-shadow: 0 0 15px rgba(247, 37, 133, 0.5) !important;
@@ -214,7 +210,7 @@ if not st.session_state.meteor_q:
 
 # --- APP LAYOUT ---
 st.markdown("<div class='hero-title'>Cosmic <span>Math</span> 🚀</div>", unsafe_allow_html=True)
-st.markdown("<div class='hero-subtitle'>Your 5th Grade Learning Universe!</div>", unsafe_allow_html=True)
+st.markdown("<div class='hero-subtitle'>Your Epic Math Universe!</div>", unsafe_allow_html=True)
 
 tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["📚 Learn", "🎯 Practice", "🏆 10-Q Challenge", "✖️ Tables", "🕹️ Arcade", "🦄 Story Math"])
 
@@ -231,7 +227,7 @@ with tab1:
         else:
             api_key = os.getenv("GROQ_API_KEY")
             client = Groq(api_key=api_key)
-            prompt = f"You are a fun 5th-grade math teacher. Explain '{concept_input}'. Use 3 simple steps, a fun everyday example, and emojis. Do not sound like a boring textbook."
+            prompt = f"You are a fun, interactive math teacher. Explain '{concept_input}'. Use 3 simple steps, a fun everyday example, and emojis. Do not sound like a boring textbook."
             with st.spinner("Firing up the learning rockets... 🚀"):
                 response = client.chat.completions.create(model="llama-3.3-70b-versatile", messages=[{"role": "user", "content": prompt}])
                 st.markdown(response.choices[0].message.content)
@@ -249,7 +245,7 @@ with tab2:
         else:
             api_key = os.getenv("GROQ_API_KEY")
             client = Groq(api_key=api_key)
-            prompt = f"Generate ONE fun 5th-grade math word problem about: {practice_topic}. Ask the question only. Do not give the answer."
+            prompt = f"Generate ONE fun math word problem about: {practice_topic}. Ask the question only. Do not give the answer."
             with st.spinner("Generating your mission..."):
                 response = client.chat.completions.create(model="llama-3.3-70b-versatile", messages=[{"role": "user", "content": prompt}])
                 st.session_state.current_question = response.choices[0].message.content
@@ -264,7 +260,7 @@ with tab2:
             else:
                 api_key = os.getenv("GROQ_API_KEY")
                 client = Groq(api_key=api_key)
-                check_prompt = f"Question: {st.session_state.current_question}. Student Answer: {student_answer}. Be extremely encouraging! Tell her if she is right or wrong, then explain step-by-step how to solve it."
+                check_prompt = f"Question: {st.session_state.current_question}. Student Answer: {student_answer}. Be extremely encouraging! Tell the student if they are right or wrong, then explain step-by-step how to solve it."
                 with st.spinner("Checking your math... 🧮"):
                     response = client.chat.completions.create(model="llama-3.3-70b-versatile", messages=[{"role": "user", "content": check_prompt}])
                     st.markdown("---")
@@ -313,12 +309,12 @@ with tab3:
         client = Groq(api_key=api_key)
         
         if score < 10:
-            prompt = f"""You are a fun 5th-grade math teacher. A student just took a 10-question math quiz and got {score}/10. 
+            prompt = f"""You are a fun, engaging math teacher. A student just took a 10-question math quiz and got {score}/10. 
             They made mistakes on these specific problems: {mistakes_for_ai}.
             Write a very encouraging message congratulating them on the ones they got right. 
             Then, provide a simple, step-by-step explanation ONLY for the problems they got wrong. Use lots of emojis!"""
         else:
-             prompt = "A 5th grade student just got a perfect 10/10 on their daily math mix. Write a short, extremely hype, congratulatory message with lots of space/rocket emojis!"
+             prompt = "A student just got a perfect 10/10 on their daily math mix. Write a short, extremely hype, congratulatory message with lots of space/rocket emojis!"
              
         with st.spinner("AI Teacher is writing your feedback... ✍️"):
             response = client.chat.completions.create(model="llama-3.3-70b-versatile", messages=[{"role": "user", "content": prompt}])
@@ -347,7 +343,7 @@ with tab4:
     if st.button(f"Show me a Magic Trick for the {table_num}s Table! ✨"):
         api_key = os.getenv("GROQ_API_KEY")
         client = Groq(api_key=api_key)
-        prompt = f"I am a 5th grader. Teach me a fun memory trick, pattern, or rhyme to help me memorize the multiplication table for the number {table_num} (up to {table_num} x 20). Make it super fun and easy!"
+        prompt = f"I am a student. Teach me a fun memory trick, pattern, or rhyme to help me memorize the multiplication table for the number {table_num} (up to {table_num} x 20). Make it super fun and easy!"
         with st.spinner("Asking the AI Math Wizard... 🧙‍♂️"):
             response = client.chat.completions.create(model="llama-3.3-70b-versatile", messages=[{"role": "user", "content": prompt}])
             st.markdown(response.choices[0].message.content)
@@ -392,7 +388,7 @@ with tab6:
         else:
             api_key = os.getenv("GROQ_API_KEY")
             client = Groq(api_key=api_key)
-            prompt = f"Create a short 5th-grade math story problem featuring: {interests}. Then, directly underneath, provide the step-by-step solution."
+            prompt = f"Create a short, fun math story problem featuring: {interests}. Then, directly underneath, provide the step-by-step solution."
             with st.spinner("Writing your custom story... ✍️"):
                 response = client.chat.completions.create(model="llama-3.3-70b-versatile", messages=[{"role": "user", "content": prompt}])
                 st.markdown(response.choices[0].message.content)
