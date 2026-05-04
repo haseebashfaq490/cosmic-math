@@ -79,16 +79,36 @@ st.markdown("""
         font-weight: 700;
     }
 
-    /* Inputs - High Contrast */
+    /* ---------------------------------------------------
+       INPUTS - HIGH CONTRAST & VISIBILITY FIX
+       --------------------------------------------------- */
+    
+    /* 1. Fix the Labels (The text directly above the input box) */
+    .stTextInput label p, .stNumberInput label p, .stTextArea label p {
+        color: #f1a5ff !important; /* Bright neon lavender */
+        font-size: 1.15rem !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.5px;
+    }
+
+    /* 2. Fix the Box Itself */
     .stTextInput input, .stTextArea textarea, .stNumberInput input {
         background-color: #2d1b4e !important;
-        color: #ffffff !important;
+        color: #ffffff !important; /* Bright white typed text */
         border: 3px solid #b5179e !important;
         border-radius: 15px !important;
         font-size: 1.2rem !important;
         padding: 12px !important;
         font-weight: bold !important;
     }
+
+    /* 3. Fix the Placeholder (The ghost text inside the box before typing) */
+    .stTextInput input::placeholder, .stTextArea textarea::placeholder {
+        color: #d8b4e2 !important; /* Light pink/grey so it's readable but lighter than typed text */
+        opacity: 0.8 !important;
+    }
+
+    /* Glowing Focus Effect */
     .stTextInput input:focus, .stTextArea textarea:focus, .stNumberInput input:focus {
         border-color: #f72585 !important;
         box-shadow: 0 0 15px rgba(247, 37, 133, 0.5) !important;
@@ -181,7 +201,7 @@ def generate_daily_quiz():
         elif op == '÷':
             b = random.randint(2, 12)
             ans = random.randint(2, 12)
-            a = b * ans # Ensures perfect division with no remainders!
+            a = b * ans 
         quiz.append({'q': f"{a} {op} {b}", 'ans': ans})
     return quiz
 
@@ -260,11 +280,9 @@ with tab3:
     st.write("### 🏆 The 10-Question Daily Challenge!")
     st.write("A brand new mix of addition, subtraction, multiplication, and division every time you open the app!")
     
-    # Create the quiz form
     quiz_answers = []
     for i, q in enumerate(st.session_state.daily_quiz):
         st.markdown(f"**Question {i+1}:**")
-        # Ensure step=1 so it only accepts integers
         ans = st.number_input(f"{q['q']} = ?", key=f"quiz_q_{i}", value=0, step=1)
         quiz_answers.append(ans)
         st.markdown("---")
@@ -275,7 +293,6 @@ with tab3:
         
         st.write("### Let's see how you did!")
         
-        # Grade instantly
         for i, q in enumerate(st.session_state.daily_quiz):
             user_ans = quiz_answers[i]
             correct_ans = q['ans']
@@ -292,17 +309,16 @@ with tab3:
             st.balloons()
             st.success("🎉 PERFECT SCORE! You are a Math Genius! 🎉")
         
-        # Get AI step-by-step for the whole quiz (praising right ones, explaining wrong ones)
         api_key = os.getenv("GROQ_API_KEY")
         client = Groq(api_key=api_key)
         
         if score < 10:
             prompt = f"""You are a fun 5th-grade math teacher. A student just took a 10-question math quiz and got {score}/10. 
             They made mistakes on these specific problems: {mistakes_for_ai}.
-            Write a very encouraging, cheerleader-style message congratulating them on the ones they got right. 
-            Then, provide a simple, step-by-step explanation ONLY for the problems they got wrong so they can learn from them. Use lots of emojis!"""
+            Write a very encouraging message congratulating them on the ones they got right. 
+            Then, provide a simple, step-by-step explanation ONLY for the problems they got wrong. Use lots of emojis!"""
         else:
-             prompt = "A 5th grade student just got a perfect 10/10 on their daily math mix (Addition, Subtraction, Multiplication, Division). Write a short, extremely hype, congratulatory message with lots of space/rocket emojis!"
+             prompt = "A 5th grade student just got a perfect 10/10 on their daily math mix. Write a short, extremely hype, congratulatory message with lots of space/rocket emojis!"
              
         with st.spinner("AI Teacher is writing your feedback... ✍️"):
             response = client.chat.completions.create(model="llama-3.3-70b-versatile", messages=[{"role": "user", "content": prompt}])
